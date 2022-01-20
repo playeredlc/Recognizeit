@@ -1,7 +1,25 @@
-body {
-  background-color: #212121;
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
 }
 
-#tst-title {
-  color: aqua;
+#title {
+  margin-top: 10%;
+  color: #BC8CF2;
+  text-align: center;
+}
+
+#canvas-wrapper {
+  text-align: center;
+}
+
+#drawing-box {
+  border-radius: 2%;
+  border: 1px solid;
+}
+
+.content-wrapper {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
 }

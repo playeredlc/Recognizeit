@@ -3,6 +3,7 @@
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <head>
     <title>Recognizeit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- local css -->
@@ -10,12 +11,20 @@
   </head>
   
   <body>
-    <p id="tst-title">Hello World!</p>
+    <div class='content-wrapper'>
+      <div id='title'>
+        <h1>Recognize.it</h1>
+      </div>
+      <div id='canvas-wrapper'>
+        <canvas id='drawing-box' width="150px" height="150px" ></canvas>
+      </div>
+    </div>
 
     <!-- Tensorflow.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
     <!-- local javascript -->
     <script src="js/index.js"></script>
+    <script src="js/drawing.js"></script>
   </body>
 
 </html>
