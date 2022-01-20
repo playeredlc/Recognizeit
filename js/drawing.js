@@ -9,6 +9,8 @@ var prevX=0,
     prevY=0,
     currX=0,
     currY=0;
+    x=0;
+    y=0;
 var isDrawing = false;
 
 function clearCanvas() {
@@ -21,23 +23,44 @@ function clearCanvas() {
 
 function initCanvas() {
   clearCanvas();
+  
+  // mouse events
   canvas.addEventListener('mousemove', (evt) => {
-    updateCoord(evt);
+    updateCoord(evt, false);
     if(isDrawing) {
       drawLine();
     }
   });
-  canvas.addEventListener('mousedown', (evt) => { isDrawing = true; }, false);
-  canvas.addEventListener('mouseup', (evt) => { isDrawing = false; }, false);
-  canvas.addEventListener('mouseout', (evt) => { isDrawing = false; }, false);
+  canvas.addEventListener('mousedown', (evt) => { isDrawing = true });
+  canvas.addEventListener('mouseup', (evt) => { isDrawing = false });
+  canvas.addEventListener('mouseout', (evt) => { isDrawing = false });
+
+  // touch events
+  canvas.addEventListener('touchstart', (evt) => { isDrawing = true; updateCoord(evt, true); });
+  canvas.addEventListener('touchmove', (evt) => {
+    updateCoord(evt, true);
+    if(isDrawing) {
+      drawLine();
+    }
+  });
+  canvas.addEventListener('touchend', (evt) => { isDrawing = false });
+  canvas.addEventListener('touchcancel', (evt) => { isDrawing = false });
 };
 
-function updateCoord(evt) {
+function updateCoord(evt, isTouch) {
+  if(isTouch) {
+    x = evt.touches[0].clientX;
+    y = evt.touches[0].clientY;
+  } else {
+    x = evt.clientX;
+    y = evt.clientY;
+  }
   prevX = currX;
-  currX = evt.clientX - canvas.offsetLeft;
+  currX = x - canvas.offsetLeft;
   prevY = currY;
-  currY = evt.clientY - canvas.offsetTop;
+  currY = y - canvas.offsetTop;
 };
+
 function drawLine() {
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
