@@ -1,5 +1,6 @@
 const backgroundColor = '#000000';
-const lineColor = '#FFFFFF';
+// const lineColor = '#FFFFFF';
+const lineColor = '#99FEFF';
 const lineWidth = 8;
 
 const canvas = document.getElementById('drawing-box');
