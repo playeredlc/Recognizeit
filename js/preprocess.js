@@ -19,6 +19,9 @@ function displayImg() {
   const { cx, cy } = getCenterOfMass(img);
   img = shiftCenterOfMass(img, cx, cy);
 
+  // create tf.Tensor ()
+  const X = createTensor(normalizePixels(img));
+
   // create canvas and display img
   const outputCanvas = document.createElement('canvas');
   cv.imshow(outputCanvas, img);
@@ -122,4 +125,18 @@ function shiftCenterOfMass(img, cx, cy){
   cv.warpAffine(img, img, transformMatrix, imgSize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, blackColor);
 
   return img;
+};
+
+function normalizePixels(img) {
+  let pixelValues = img.data;
+  pixelValues = Float32Array.from(pixelValues);
+  pixelValues = pixelValues.map(px => px/255.0);
+
+  return pixelValues;
+};
+
+function createTensor(normalizedPixels) {
+  const X = tf.tensor([normalizedPixels]);
+
+  return X;
 };
