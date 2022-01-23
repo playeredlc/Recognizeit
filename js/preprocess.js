@@ -15,6 +15,10 @@ function displayImg() {
   // add padding
   img = addPadding(img);
 
+  // calculate center of mass and shift
+  const { cx, cy } = getCenterOfMass(img);
+  img = shiftCenterOfMass(img, cx, cy);
+
   // create canvas and display img
   const outputCanvas = document.createElement('canvas');
   cv.imshow(outputCanvas, img);
@@ -92,6 +96,30 @@ function addPadding(img) {
   // add padding as a border
   const blackColor = new cv.Scalar(0, 0, 0, 1);
   cv.copyMakeBorder(img, img, padTop, padBottom, padLeft, padRight, cv.BORDER_CONSTANT, blackColor);
+
+  return img;
+};
+
+function getCenterOfMass(img) {
+  let contours = getContours(img);
+  let cnt = contours.get(0);
+
+  const moments = cv.moments(cnt, false);
+  const cx = moments.m10 / moments.m00;
+  const cy = moments.m01 / moments.m00;
+
+  return { cx: cx, cy: cy };
+};
+
+function shiftCenterOfMass(img, cx, cy){
+  // shift based on the center of mass
+  const xTranslate = Math.round(img.cols/2.0 - cx);
+  const yTranslate = Math.round(img.rows/2.0 - cy);
+  const imgSize = new cv.Size(img.cols, img.rows);
+  const transformMatrix = cv.matFromArray(2, 3, cv.CV_64FC1, [1, 0, xTranslate, 0, 1, yTranslate]);
+  const blackColor = new cv.Scalar(0, 0, 0, 1);
+  // apply shift
+  cv.warpAffine(img, img, transformMatrix, imgSize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, blackColor);
 
   return img;
 };
