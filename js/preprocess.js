@@ -1,34 +1,26 @@
-// canvas to display partial results of preprocess steps
-function displayImg() {
+function canvasToTensor(canvas) {
+  // full preprocess workflow using the functions defined in this module.
   
-  // load img and convert to gray scale
-  let img = loadImg();
+  // load image and convert to gray scale
+  let img = loadImg(canvas);
   img = toGrayScale(img);
-
   // get contours to calculate bounding rectangle and crop
   let rect = getBoundRect(getContours(img));
   img = cropImg(rect, img);
-  
   // resize img
   img = resizeImg(img);
-
   // add padding
   img = addPadding(img);
-
   // calculate center of mass and shift
   const { cx, cy } = getCenterOfMass(img);
   img = shiftCenterOfMass(img, cx, cy);
-
   // create tf.Tensor ()
   const X = createTensor(normalizePixels(img));
 
-  // create canvas and display img
-  const outputCanvas = document.createElement('canvas');
-  cv.imshow(outputCanvas, img);
-  document.body.appendChild(outputCanvas);
+  return { X: X, img: img };
 };
 
-function loadImg() {
+function loadImg(canvas) {
   let img = cv.imread(canvas);
 
   return img;
@@ -46,6 +38,8 @@ function getContours(img) {
   let hierarchy = new cv.Mat();
   cv.findContours(img, contours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
 
+  hierarchy.delete();
+
   return contours;
 };
 
@@ -53,6 +47,8 @@ function getBoundRect(contours) {
   let cnt = contours.get(0);
   let rect = cv.boundingRect(cnt);
 
+  contours.delete();
+  cnt.delete();
   return rect;
 };
 
@@ -111,6 +107,9 @@ function getCenterOfMass(img) {
   const cx = moments.m10 / moments.m00;
   const cy = moments.m01 / moments.m00;
 
+  contours.delete();
+  cnt.delete();
+
   return { cx: cx, cy: cy };
 };
 
@@ -123,6 +122,8 @@ function shiftCenterOfMass(img, cx, cy){
   const blackColor = new cv.Scalar(0, 0, 0, 1);
   // apply shift
   cv.warpAffine(img, img, transformMatrix, imgSize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, blackColor);
+
+  transformMatrix.delete();
 
   return img;
 };
