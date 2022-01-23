@@ -10,11 +10,10 @@ async function loadModel() {
 };
 
 function predictDigit(X) {
-  const prediction = tfModel.execute({'X': X}, ['accuracy_calc/prediction']);
-  
-  prediction.print();
-  console.log(prediction.toString());
-  
+  const prediction = tfModel.execute({'X': X}, ['accuracy_calc/prediction']);  
+  const predictionAsNumber = Number(prediction.dataSync()[0]);
+
   prediction.dispose();
-  console.log(tf.memory());
+  
+  return predictionAsNumber;
 };

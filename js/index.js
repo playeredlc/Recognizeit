@@ -1,30 +1,15 @@
-// const modelPath = '../tensorflow/tfjs_savedmodel/model.json';
-// let isModelLoaded = false;
-// let tfModel;
-
-// function predictDigit(tfModel, X) {
-//   const prediction = tfModel.execute({'X': X}, ['accuracy_calc/prediction']);
-//   prediction.print();
-//   prediction.dispose();
-// }
-
-// async function run() {
-//   if(!isModelLoaded) {
-//     tfModel = await tf.loadGraphModel(modelPath);
-//     isModelLoaded = true;
-//   }
-//   const { X, img } = canvasToTensor(canvas);
-//   predictDigit(tfModel, X);
-// };
-
 async function run() {
   if(!isModelLoaded) {
     await loadModel();
   }
-  
+
   const { X, img } = canvasToTensor(canvas);
-  predictDigit(X);
-  
+  const predictedDigit = predictDigit(X);
+
   X.dispose();
   img.delete();
+  console.log(tf.memory());
+
+  console.log('The digit was recognized as: ', predictedDigit);
+
 };
