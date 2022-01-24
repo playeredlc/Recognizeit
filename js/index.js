@@ -8,9 +8,9 @@ async function run() {
 
   X.dispose();
   img.delete();
-  console.log(tf.memory());
-
-  console.log('The digit was recognized as: ', predictedDigit);
+  // console.log(tf.memory());
+  // console.log('The digit was recognized as: ', predictedDigit);
+  
   displayResult(predictedDigit)
 
 };
