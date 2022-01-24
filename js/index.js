@@ -11,5 +11,11 @@ async function run() {
   console.log(tf.memory());
 
   console.log('The digit was recognized as: ', predictedDigit);
+  displayResult(predictedDigit)
 
+};
+
+function displayResult(prediction) {
+  document.getElementById('result').innerHTML = 'The digit was recognized as:';
+  document.getElementById('prediction').innerHTML = prediction.toString();
 };

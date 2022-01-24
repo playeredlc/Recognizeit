@@ -17,3 +17,5 @@ function predictDigit(X) {
   
   return predictionAsNumber;
 };
+
+loadModel();

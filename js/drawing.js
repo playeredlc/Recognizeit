@@ -19,8 +19,10 @@ function clearCanvas() {
   ctx.fillStyle = backgroundColor;
   ctx.strokeStyle = lineColor;
   ctx.lineWidth = lineWidth;
-  ctx.lineCap = 'round';  
-}
+  ctx.lineCap = 'round';
+  document.getElementById('result').innerHTML = '';
+  document.getElementById('prediction').innerHTML = '';
+};
 
 function initCanvas() {
   clearCanvas();
