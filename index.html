@@ -4,6 +4,10 @@
   <head>
     <title>Recognizeit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- GOOGLE FONTS CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700&family=VT323&display=swap" rel="stylesheet">
     <!-- favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- bootstrap css -->
@@ -15,7 +19,7 @@
   <body>
     <div class='content-wrapper'>
       <div id='title'>
-        <h1>Recognize<i>it</i></h1>
+        <h1><strong>Recognize</strong><i>it</i></h1>
         <small><i>Handwrite a digit between 0-9:</i></small>
       </div>
       <div id='canvas-wrapper'>
@@ -30,7 +34,8 @@
         <button class='btn btn-outline-light btn-sm' onclick="clearCanvas()">Clear</button>
       </div>
     </div>
-    <div>
+    <div class='footer'>
+      <a href='https://github.com/playeredlc' target="_blank"><i>&lt/&gt</i> edlc</a>, 2021.
     </div>
     <!-- Tensorflow.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
