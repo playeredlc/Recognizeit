@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- local css -->
     <link rel="stylesheet" href="css/styles.css">
   </head>
@@ -13,14 +15,22 @@
   <body>
     <div class='content-wrapper'>
       <div id='title'>
-        <h1>Recognize.it</h1>
+        <h1>Recognize<i>it</i></h1>
+        <small><i>Handwrite a digit between 0-9:</i></small>
       </div>
       <div id='canvas-wrapper'>
         <canvas id='drawing-box' width="150px" height="150px" ></canvas>
       </div>
+      <div>
+        <p id='result'>The digit was recognized as:</p>
+        <p id='prediction'>1</p>
+      </div>
+      <div class='btn-wrapper'>
+        <button class='btn btn-light btn-sm' onclick="run()">Recognize</button>
+        <button class='btn btn-outline-light btn-sm' onclick="clearCanvas()">Clear</button>
+      </div>
     </div>
     <div>
-      <button onclick="run()">Show!</button>
     </div>
     <!-- Tensorflow.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
@@ -31,6 +41,8 @@
     <script src="js/tfModel.js"></script>
     <script src="js/drawing.js"></script>
     <script src="js/preprocess.js"></script>
+    <!-- bootstrap bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 
 </html>
