@@ -15,7 +15,7 @@ var prevX=0,
 var isDrawing = false;
 
 function clearCanvas() {
-  ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+  ctx.fillRect(0, 0, canvas.clientWidth+2, canvas.clientHeight+2);
   ctx.fillStyle = backgroundColor;
   ctx.strokeStyle = lineColor;
   ctx.lineWidth = lineWidth;
