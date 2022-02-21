@@ -39,15 +39,25 @@ function initCanvas() {
   canvas.addEventListener('mouseout', (evt) => { isDrawing = false });
 
   // touch events
-  canvas.addEventListener('touchstart', (evt) => { isDrawing = true; updateCoord(evt, true); });
+  canvas.addEventListener('touchstart', (evt) => { 
+    evt.preventDefault();
+    isDrawing = true; updateCoord(evt, true);
+  });
   canvas.addEventListener('touchmove', (evt) => {
+    evt.preventDefault();
     updateCoord(evt, true);
     if(isDrawing) {
       drawLine();
     }
   });
-  canvas.addEventListener('touchend', (evt) => { isDrawing = false });
-  canvas.addEventListener('touchcancel', (evt) => { isDrawing = false });
+  canvas.addEventListener('touchend', (evt) => {
+    evt.preventDefault();
+    isDrawing = false
+  });
+  canvas.addEventListener('touchcancel', (evt) => {
+    evt.preventDefault();
+    isDrawing = false
+  });
 };
 
 function updateCoord(evt, isTouch) {
